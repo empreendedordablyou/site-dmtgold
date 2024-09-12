@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbwzKAgb16aU2zkCgQpwN5dml3kAkcpHqFY7HxLuauZVBRvxaeSAAY8HE2zQwibRnW7YNQ/exec';
-    const form = document.forms['form-dtmgold'];
+    const scriptURL = 'IMPLEMENT_LINK_APP_SCRIPT';
+    const form = document.forms['cad-register'];
 
     form.addEventListener('submit', function(e) {
         e.preventDefault(); // Impede o envio imediato do formulário
@@ -11,12 +11,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Verifica se o reCAPTCHA foi carregado corretamente
         if (typeof grecaptcha !== "undefined") {
-            function onClick(e) {
-            e.preventDefault();
-            grecaptcha.enterprise.ready(async () => {
-              const token = await grecaptcha.enterprise.execute('6Lc--UAqAAAAABtMCFoedz2_mQyepCUsMHb0yoqa', {action: 'LOGIN'});
-            });
-          } // Debug: Exibe o token gerado no console
+            grecaptcha.ready(function() {
+                grecaptcha.execute('YOUR_SITE_KEY', {action: 'submit'}).then(function(token) {
+                    console.log("Token gerado:", token); // Debug: Exibe o token gerado no console
                     
                     let recaptchaResponse = document.createElement('input');
                     recaptchaResponse.setAttribute('type', 'hidden');
