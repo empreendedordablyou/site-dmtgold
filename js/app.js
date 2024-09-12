@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const scriptURL = 'IMPLEMENT_LINK_APP_SCRIPT';
-    const form = document.forms['cad-register'];
+    const form = document.forms['form-dtmgold'];
 
     form.addEventListener('submit', function(e) {
         e.preventDefault(); // Impede o envio imediato do formulário
