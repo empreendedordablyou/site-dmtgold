@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_URL'; // URL do Google Apps Script
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbyEdzEdirfxXLsIU5-v5DWwJvzcaIbeb6_cfhtQLcFrAW_sOQCpDeGDfzvDcbJZKjOQUg/exec'; // URL do Google Apps Script
     const form = document.forms['form-dtmgold'];
 
     form.addEventListener('submit', function(e) {
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Verifica se o reCAPTCHA foi carregado corretamente
         if (typeof grecaptcha !== "undefined") {
             grecaptcha.ready(function() {
-                grecaptcha.execute('YOUR_RECAPTCHA_V6_KEY', {action: 'submit'}).then(function(token) {
+                grecaptcha.execute('6Lc--UAqAAAAABtMCFoedz2_mQyepCUsMHb0yoqa', {action: 'submit'}).then(function(token) {
                     console.log("Token gerado:", token); // Debug: Exibe o token gerado no console
                     
                     let recaptchaResponse = document.createElement('input');
