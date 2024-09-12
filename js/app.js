@@ -11,9 +11,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Verifica se o reCAPTCHA foi carregado corretamente
         if (typeof grecaptcha !== "undefined") {
-            grecaptcha.ready(function() {
-                grecaptcha.execute('6Lc--UAqAAAAABtMCFoedz2_mQyepCUsMHb0yoqa', {action: 'submit'}).then(function(token) {
-                    console.log("Token gerado:", token); // Debug: Exibe o token gerado no console
+            function onClick(e) {
+            e.preventDefault();
+            grecaptcha.enterprise.ready(async () => {
+              const token = await grecaptcha.enterprise.execute('6Lc--UAqAAAAABtMCFoedz2_mQyepCUsMHb0yoqa', {action: 'LOGIN'});
+            });
+          } // Debug: Exibe o token gerado no console
                     
                     let recaptchaResponse = document.createElement('input');
                     recaptchaResponse.setAttribute('type', 'hidden');
