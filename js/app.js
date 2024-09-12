@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
     const scriptURL = 'https://script.google.com/macros/s/AKfycbwzKAgb16aU2zkCgQpwN5dml3kAkcpHqFY7HxLuauZVBRvxaeSAAY8HE2zQwibRnW7YNQ/exec';
-    const form = document.forms['cad-register'];
+    const form = document.forms['form-dtmgold'];
 
     form.addEventListener('submit', function(e) {
         e.preventDefault(); // Impede o envio imediato do formulário
