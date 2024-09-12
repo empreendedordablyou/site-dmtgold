@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const scriptURL = 'IMPLEMENT_LINK_APP_SCRIPT';
+    const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_URL'; // URL do Google Apps Script
     const form = document.forms['form-dtmgold'];
 
     form.addEventListener('submit', function(e) {
@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Verifica se o reCAPTCHA foi carregado corretamente
         if (typeof grecaptcha !== "undefined") {
             grecaptcha.ready(function() {
-                grecaptcha.execute('YOUR_SITE_KEY', {action: 'submit'}).then(function(token) {
+                grecaptcha.execute('YOUR_RECAPTCHA_V6_KEY', {action: 'submit'}).then(function(token) {
                     console.log("Token gerado:", token); // Debug: Exibe o token gerado no console
                     
                     let recaptchaResponse = document.createElement('input');
@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     recaptchaResponse.setAttribute('value', token);
                     form.appendChild(recaptchaResponse);
 
-                    // Simula o tempo de exibição "Enviando..." de 10 segundos
+                    // Simula o tempo de exibição "Enviando..." de 5 segundos
                     setTimeout(function() {
                         // Envia o formulário após 5 segundos de espera
                         fetch(scriptURL, { method: 'POST', body: new FormData(form)})
@@ -51,10 +51,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
         if (inputValue.length > 10) {
             inputValue = inputValue.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
-        } else if (inputValue.length > 6) {
-            inputValue = inputValue.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
-        } else if (inputValue.length > 2) {
-            inputValue = inputValue.replace(/(\d{2})(\d{0,5})/, '($1) $2');
+        } else {
+            inputValue = inputValue.replace(/(\d{2})(\d{4})(\d{4})/, '($1) $2-$3');
         }
 
         event.target.value = inputValue;
