@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Verifica se o reCAPTCHA foi carregado corretamente
         if (typeof grecaptcha !== "undefined") {
             grecaptcha.ready(function() {
-                grecaptcha.execute('6Lfn8z4qAAAAAI15a6bb8zlFTP5vbcvYu60kPUkZ', {action: 'submit'}).then(function(token) {
+                grecaptcha.execute('6Lc--UAqAAAAABtMCFoedz2_mQyepCUsMHb0yoqa', {action: 'submit'}).then(function(token) {
                     console.log("Token gerado:", token); // Debug: Exibe o token gerado no console
                     
                     let recaptchaResponse = document.createElement('input');
