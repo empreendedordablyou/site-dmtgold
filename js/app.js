@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         fetch(scriptURL, { method: 'POST', body: new FormData(form)})
                             .then(response => {
                                 alert("Você está Cadastrado. > Acesse o grupo a seguir e se mantenha atualizado!");
-                                window.location.replace("YOUR_CHAT_GROUP_LINK_WHATSAPP");
+                                window.location.replace("https://chat.whatsapp.com/Hp3UISJ76NP7igiLg961y2");
                             })
                             .catch(error => console.error('Error!', error.message))
                             .finally(() => {
