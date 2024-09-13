@@ -5,9 +5,9 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('submit', function(e) {
         e.preventDefault(); // Impede o envio imediato do formulário
         
-        const input = document.getElementById('confirm');
-        input.disabled = true;
-        input.classList.add('loading');
+        const button = document.getElementById('confirm');
+        button.disabled = true;
+        button.classList.add('loading');
 
         // Verifica se o reCAPTCHA foi carregado corretamente
         if (typeof grecaptcha !== "undefined") {
@@ -21,9 +21,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     recaptchaResponse.setAttribute('value', token);
                     form.appendChild(recaptchaResponse);
 
-                    // Simula o tempo de exibição "Enviando..." de 5 segundos
+                    // Simula o tempo de exibição "Enviando..." de 3 segundos
                     setTimeout(function() {
-                        // Envia o formulário após 5 segundos de espera
+                        // Envia o formulário após 3 segundos de espera
                         fetch(scriptURL, { method: 'POST', body: new FormData(form)})
                             .then(response => {
                                 alert("Você está Cadastrado. > Acesse o grupo a seguir e se mantenha atualizado!");
@@ -31,10 +31,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             })
                             .catch(error => console.error('Error!', error.message))
                             .finally(() => {
-                                input.disabled = false;
-                                input.classList.remove('loading');
+                                button.disabled = false;
+                                button.classList.remove('loading');
                             });
-                    }, 5000); // Tempo de envio de formulário (5 segundos)
+                    }, 3000); // Tempo de envio de formulário (3 segundos)
                 });
             });
         } else {
