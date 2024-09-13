@@ -5,9 +5,9 @@ document.addEventListener('DOMContentLoaded', function() {
     form.addEventListener('submit', function(e) {
         e.preventDefault(); // Impede o envio imediato do formulário
         
-        const button = document.getElementById('confirm');
-        button.disabled = true;
-        button.classList.add('loading');
+        const input = document.getElementById('confirm');
+        input.disabled = true;
+        input.classList.add('loading');
 
         // Verifica se o reCAPTCHA foi carregado corretamente
         if (typeof grecaptcha !== "undefined") {
@@ -31,16 +31,16 @@ document.addEventListener('DOMContentLoaded', function() {
                             })
                             .catch(error => console.error('Error!', error.message))
                             .finally(() => {
-                                button.disabled = false;
-                                button.classList.remove('loading');
+                                input.disabled = false;
+                                input.classList.remove('loading');
                             });
                     }, 5000); // Tempo de envio de formulário (5 segundos)
                 });
             });
         } else {
             console.error("grecaptcha não foi definido. Verifique se o script do reCAPTCHA foi carregado corretamente.");
-            button.disabled = false;
-            button.classList.remove('loading');
+            input.disabled = false;
+            input.classList.remove('loading');
         }
     });
 
