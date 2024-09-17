@@ -432,7 +432,7 @@ b, strong {
 .contact-form .form-control:hover, .contact-form .form-control:focus {
   border-color: #ffc200;
 }
-.contact-form .submit-btn {
+/* .contact-form .submit-btn {
   background: #ffc200;
   border-radius: 50px;
   color: #000000;
@@ -443,7 +443,7 @@ b, strong {
 }
 .contact-form .submit-btn:hover {
   background: #474559;
-}
+} */
 
 .contact-info {
   background: #000;
@@ -456,22 +456,47 @@ b, strong {
 }
 
 #button-container input[type="submit"] {
-  background-color: #4caf50; /* Verde */
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 4px;
+    position: relative;
+    padding: 10px 20px;
+    border: none;
+    background-color: #ffc200;
+    color: #000000;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
+#button-container input[type="submit"]:hover {
+    background-color: #474559;
+}
+
+/* Efeito de loading */
 #button-container input[type="submit"].loading {
-  background-color: #9e9e9e; /* Cinza durante o carregamento */
-  cursor: not-allowed;
+    background-color: #007bff;
+    cursor: not-allowed;
+}
+
+#button-container input[type="submit"].loading::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 24px;
+    height: 24px;
+    border: none;
+    border-top: 2px solid transparent;
+    border-radius: 75%;
+    animation: spin 1s linear infinite;
+    transform: translate(-50%, -50%);
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .push-notification {
