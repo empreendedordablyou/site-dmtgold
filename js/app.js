@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
 
-    const buttonContainer = document.querySelector('.ml-lg-auto col-lg-5 col-12'); // Substitua pela classe ou ID da div que contém o input
+    const buttonContainer = document.querySelector('#button-container'); // Substitua pela classe ou ID da div que contém o input
     const submitButton = buttonContainer ? buttonContainer.querySelector('input[type="submit"]') : null;
 
     if (!submitButton) {
