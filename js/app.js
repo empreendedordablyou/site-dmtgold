@@ -1,30 +1,54 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyEdzEdirfxXLsIU5-v5DWwJvzcaIbeb6_cfhtQLcFrAW_sOQCpDeGDfzvDcbJZKjOQUg/exec'; // URL do Google Apps Script
     const form = document.forms['form-dtmgold'];
+    const button = document.getElementById('confirm');
 
-    form.addEventListener('submit', function(e) {
+    // Função para exibir a notificação push
+    function showPushNotification(message) {
+        const pushNotification = document.createElement('div');
+        pushNotification.classList.add('push-notification');
+        pushNotification.innerHTML = message;
+        document.body.appendChild(pushNotification);
+
+        // Exibe a notificação
+        setTimeout(() => {
+            pushNotification.classList.add('show');
+        }, 100); // Pequeno atraso para garantir a transição
+
+        // Remove a notificação após 3 segundos
+        setTimeout(() => {
+            pushNotification.classList.remove('show');
+            setTimeout(() => {
+                document.body.removeChild(pushNotification);
+            }, 500); // Tempo para a transição de saída
+        }, 3000);
+    }
+
+    // Modifica a função de submissão do formulário
+    form.addEventListener('submit', function (e) {
         e.preventDefault(); // Impede o envio imediato do formulário
-        
-        const button = document.getElementById('confirm');
         button.disabled = true;
         button.classList.add('loading');
 
         // Verifica se o reCAPTCHA foi carregado corretamente
         if (typeof grecaptcha !== "undefined") {
-            grecaptcha.ready(function() {
-                grecaptcha.execute('6Lc--UAqAAAAABtMCFoedz2_mQyepCUsMHb0yoqa', {action: 'submit'}).then(function(token) {
+            grecaptcha.ready(function () {
+                grecaptcha.execute('6Lc--UAqAAAAABtMCFoedz2_mQyepCUsMHb0yoqa', { action: 'submit' }).then(function (token) {
                     console.log("Token gerado:", token); // Debug: Exibe o token gerado no console
-                    
+
                     let recaptchaResponse = document.createElement('input');
                     recaptchaResponse.setAttribute('type', 'hidden');
                     recaptchaResponse.setAttribute('name', 'g-recaptcha-response');
                     recaptchaResponse.setAttribute('value', token);
                     form.appendChild(recaptchaResponse);
 
-                    // Simula o tempo de exibição "Enviando..." de 3 segundos
-                    setTimeout(function() {
-                        // Envia o formulário após 3 segundos de espera
-                        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+                    // Exibe a notificação push
+                    showPushNotification('Formulário enviado com sucesso!');
+
+                    // Simula o tempo de exibição "Enviando..." de 2 segundos
+                    setTimeout(function () {
+                        // Envia o formulário após 2 segundos de espera
+                        fetch(scriptURL, { method: 'POST', body: new FormData(form) })
                             .then(response => {
                                 alert("Você está Cadastrado. > Acesse o grupo a seguir e se mantenha atualizado!");
                                 window.location.replace("https://chat.whatsapp.com/Hp3UISJ76NP7igiLg961y2");
@@ -34,13 +58,13 @@ document.addEventListener('DOMContentLoaded', function() {
                                 button.disabled = false;
                                 button.classList.remove('loading');
                             });
-                    }, 3000); // Tempo de envio de formulário (3 segundos)
+                    }, 2000); // Reduzido para 2 segundos
                 });
             });
         } else {
             console.error("grecaptcha não foi definido. Verifique se o script do reCAPTCHA foi carregado corretamente.");
-            input.disabled = false;
-            input.classList.remove('loading');
+            button.disabled = false;
+            button.classList.remove('loading');
         }
     });
 
