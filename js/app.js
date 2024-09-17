@@ -2,9 +2,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const scriptURL = 'https://script.google.com/macros/s/AKfycbyEdzEdirfxXLsIU5-v5DWwJvzcaIbeb6_cfhtQLcFrAW_sOQCpDeGDfzvDcbJZKjOQUg/exec'; // URL do Google Apps Script
     const form = document.forms['form-dtmgold'];
 
-    // Se o botão estiver dentro de uma div, obtém a div e o input de submit
+    // Verifica se o formulário e a div com o botão existem
+    if (!form) {
+        console.error("Formulário não encontrado. Verifique o nome do formulário.");
+        return;
+    }
+
     const buttonContainer = document.querySelector('.button-container'); // Substitua pela classe ou ID da div que contém o input
-    const submitButton = buttonContainer.querySelector('input[type="submit"]');
+    const submitButton = buttonContainer ? buttonContainer.querySelector('input[type="submit"]') : null;
+
+    if (!submitButton) {
+        console.error("Botão de envio não encontrado. Verifique a classe ou ID do botão.");
+        return;
+    }
 
     form.addEventListener('submit', function(e) {
         e.preventDefault(); // Impede o envio imediato do formulário
@@ -29,6 +39,9 @@ document.addEventListener('DOMContentLoaded', function() {
                         // Envia o formulário após 5 segundos de espera
                         fetch(scriptURL, { method: 'POST', body: new FormData(form)})
                             .then(response => {
+                                if (!response.ok) {
+                                    throw new Error('Network response was not ok');
+                                }
                                 // Exibe a notificação push após o envio
                                 showPushNotification('Formulário enviado com sucesso!');
                                 
@@ -37,7 +50,10 @@ document.addEventListener('DOMContentLoaded', function() {
                                     window.location.replace("https://chat.whatsapp.com/Hp3UISJ76NP7igiLg961y2");
                                 }, 2000); // Reduzido para 2 segundos
                             })
-                            .catch(error => console.error('Error!', error.message))
+                            .catch(error => {
+                                console.error('Error!', error.message);
+                                showPushNotification('Ocorreu um erro ao enviar o formulário.');
+                            })
                             .finally(() => {
                                 submitButton.disabled = false; // Reativa o botão
                                 submitButton.classList.remove('loading'); // Remove a classe de loading, se necessário
